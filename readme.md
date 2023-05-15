@@ -77,11 +77,11 @@ display error view as expected
 
 #### Git issue
 初始puml
-![first.png](/Users/jingtian-rea/Documents/prompts/prompt-android/gpt_flow_1.png)
+![first.png](https://github.com/GPT-Coding/prompt-chain-android/blob/main/gpt_flow_1.png)
 架构分层puml
-![mid.png](/Users/jingtian-rea/Documents/prompts/prompt-android/gpt-flow2.png)
+![mid.png](https://github.com/GPT-Coding/prompt-chain-android/blob/main/gpt-flow2.png)
 最终的puml
-![final.png](/Users/jingtian-rea/Documents/prompts/prompt-android/final-flow.png)
+![final.png](https://github.com/GPT-Coding/prompt-chain-android/blob/main/final-flow.png)
 
 
 我修改了uml中的方法与返回的对象,其中的对象class如下    
