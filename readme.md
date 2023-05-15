@@ -1,6 +1,6 @@
 ## onBoarding
 
-### TechStacks
+### Knowledge
 
 * **Language**: Kotlin
 * **Dependencies**: androidx.*, compose, dagger2 
@@ -8,7 +8,7 @@
 * **Folder structure**    
 
 ```
-├── di(only android)
+├── di
 │   └── components
 │   └── module
 ├── data
@@ -45,8 +45,8 @@ repository为usecase提供方法，通过client完成提供远程服务的调用
 
 #### Story
 
-As a user
-I want the home screen to be displayed as expected 
+**As a** user    
+**I want** the home screen to be displayed as expected 
 
 AC 1：
 **Given** 
@@ -77,50 +77,54 @@ display error view as expected
 
 #### Git issue
 初始puml
-![ae51177e70b97ad0e170991636b65607.png](evernotecid://075974F6-E33A-498A-9FCB-88944E25008B/appyinxiangcom/28906394/ENResource/p64)
+![first.png](/Users/jingtian-rea/Documents/prompts/prompt-android/gpt_flow_1.png)
 架构分层puml
-![67eed3e54c4d27a0d93fc93d926f89ea.png](evernotecid://075974F6-E33A-498A-9FCB-88944E25008B/appyinxiangcom/28906394/ENResource/p65)
+![mid.png](/Users/jingtian-rea/Documents/prompts/prompt-android/gpt-flow2.png)
 最终的puml
-![ff64540194486d51b977821a66e89d11.png](evernotecid://075974F6-E33A-498A-9FCB-88944E25008B/appyinxiangcom/28906394/ENResource/p63)
+![final.png](/Users/jingtian-rea/Documents/prompts/prompt-android/final-flow.png)
 
 
-我修改了uml中的方法与返回的对象,其中的对象class如下
+我修改了uml中的方法与返回的对象,其中的对象class如下    
+
 ```
 data class Prompt(val prompt: String?)
 data class PromptModel(val helloPrompt: String?)
 data class HomeViewState(val content: String = "loading")
 ```
 
-* repository
-ME：测试工具是mockk，请为我生成PromptsRepository的测试代码和生成代码
-GPT：......
-ME: repository返回的类型是Flow<Result<Prompt>>，promptsService返回的类型也是Flow<Result<Prompt>>，这个story中Result的类型都是kotlin.Result, 请修改PromptsRepository与PromptsRepositoryTest
-GPT: ......
+* repository    
+
+ME：测试工具是mockk，请为我生成PromptsRepository的测试代码和生成代码    
+GPT：......    
+ME: repository返回的类型是Flow<Result<Prompt>>，promptsService返回的类型也是Flow<Result<Prompt>>，这个story中Result的类型都是kotlin.Result, 请修改PromptsRepository与PromptsRepositoryTest    
+GPT: ......    
 promptsService 返回的类型是Flow<Result<Prompt>>，在PromptsRepository中我们不会对它进行解析和修改
-GPT: ......
+GPT: ......    
 
-生产的代码：PromptsRepositoryTest，PromptsRepository
+生产的代码：PromptsRepositoryTest，PromptsRepository    
 
-*usecase
-ME：请为我生成PromptsUseCase与PromptsUseCaseTest，在usecase中Prompt会被转化为PromptModel，其中的逻辑是：
-1.如果Prompt的data不为null, PromptModel的helloPrompt将是Prompt的data字段的内容的前面添加“ hello ”
-2.如果Prompt的data为null, PromptModel的helloPrompt将是"empty"
-它返回的类型是Flow<Result<PromptModel>>，PromptsRepository返回的类型是Flow<Result<Prompt>>
+* usecase       
 
-GPT: ......
-生产的代码：PromptsUseCaseTest，PromptsUseCase
+ME：请为我生成PromptsUseCase与PromptsUseCaseTest，在usecase中Prompt会被转化为PromptModel，其中的逻辑是：    
+1.如果Prompt的data不为null, PromptModel的helloPrompt将是Prompt的data字段的内容的前面添加“ hello ”     
+2.如果Prompt的data为null, PromptModel的helloPrompt将是"empty"    
+它返回的类型是Flow<Result<PromptModel>>，PromptsRepository返回的类型是Flow<Result<Prompt>>      
 
-*viewModel
-ME：
-1. HomeViewModel会将usecase返回的Flow<Result<PromptModel>>，转化为HomeViewState，其中转化为HomeViewState的content将是PromptModel的helloPrompt
-2. HomeViewState将会更新到私有变量_state = MutableStateFlow(HomeViewState())中，暴露为共有变量state提供给View使用。
-3. HomeViewState的初始状态是Loading
-4. 当usecase返回failure的时候，HomeViewState为Error
-5. 返回PromptModel的helloPrompt值为"empty"的时候，HomeViewState是Empty，其余是Success，
-GPT: ......
-ME：请用result.fold方法来解析usecase的返回
-GPT....
-生产的代码：HomeViewModelTest，HomeViewModel
+GPT: ......    
+生产的代码：PromptsUseCaseTest，PromptsUseCase    
+
+* viewModel    
+
+ME：    
+1. HomeViewModel会将usecase返回的Flow<Result<PromptModel>>，转化为HomeViewState，其中转化为HomeViewState的content将是PromptModel的helloPrompt    
+2. HomeViewState将会更新到私有变量_state = MutableStateFlow(HomeViewState())中，暴露为共有变量state提供给View使用。    
+3. HomeViewState的初始状态是Loading    
+4. 当usecase返回failure的时候，HomeViewState为Error    
+5. 返回PromptModel的helloPrompt值为"empty"的时候，HomeViewState是Empty，其余是Success     
+GPT: ......    
+ME：请用result.fold方法来解析usecase的返回    
+GPT....    
+生产的代码：HomeViewModelTest，HomeViewModel    
 
 思考题：使用类似的story生成iOS的代码，或者Flutter的代码
 

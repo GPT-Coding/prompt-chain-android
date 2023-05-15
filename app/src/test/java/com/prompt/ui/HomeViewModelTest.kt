@@ -22,7 +22,7 @@ class HomeViewModelTest {
     val testCoroutineRule = TestCoroutineRule()
 
     @Test
-    fun `test loading state`() = testCoroutineRule.runBlockingTest {
+    fun `When init then loading state`() = testCoroutineRule.runBlockingTest {
         val promptsUseCase = mockk<PromptsUseCase>()
         val viewModel = HomeViewModel(promptsUseCase)
         testCoroutineRule.testCoroutineDispatcher.scheduler.runCurrent()
